@@ -3,8 +3,6 @@ import { Node } from '../model/node';
 import { Config, SELECT_CHECKBOX, SELECT_RADIO } from '../model/config';
 import { SpTreeviewNodeComponent } from '../sp-treeview-node/sp-treeview-node.component';
 
-import { Observable } from "rxjs/Rx";
-
 @Component({
   selector: 'sp-treeview',
   templateUrl: './sp-treeview.component.html',
