@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Node } from './sp-treeview/model/node';
-import { Config, SELECT_CHECKBOX, SELECT_RADIO, CHECKED_VALUE_HIGHEST_SELECTED, SELECT_NONE } from './sp-treeview/model/config';
+import { Config, SELECT_CHECKBOX, SELECT_RADIO, CHECKED_VALUE_HIGHEST_SELECTED, SELECT_NONE, CHECKED_VALUE_ALL, CHECKED_VALUE_LEAVES } from './sp-treeview/model/config';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent {
       new Node("Computer", 12, [
         new Node("Alienware", 121, [
           new Node("Alienware 17", 1211),
-          new Node("Alienware 14", 1212)
+          new Node("Alienware 14", 1212, null, true)
         ]),
         new Node("HP", 122, [
           new Node("HP Omen", 1221),
@@ -60,7 +60,7 @@ export class AppComponent {
     ])
   ];
 
-  public config: Config = new Config(SELECT_NONE, CHECKED_VALUE_HIGHEST_SELECTED);
+  public config: Config = new Config(SELECT_CHECKBOX, CHECKED_VALUE_HIGHEST_SELECTED);
 
   constructor() {
     console.log(this.config);
