@@ -38,26 +38,11 @@ export class SpTreeviewNodeComponent implements OnInit {
 
   ngOnInit() {
     if (this.config.select == this.SELECT_CHECKBOX) {
-      this.checkChildrenRecursive(this.node);
+      this.node.verifyChildrenRecursive();
     } else if (this.config.select == this.SELECT_RADIO) {
       // can check if multiple nodes are selected then log the error
     }
 
-  }
-
-  private checkChildrenRecursive(node: Node) {
-    if (node == null || node.children == null) {
-      return;
-    }
-
-    if (node.checked) {
-      this.changeChildren(node);
-      return;
-    }
-
-    node.children.filter(n => n.children != null).forEach(n => this.checkChildrenRecursive(n));
-
-    this.checkChildren(node);
   }
 
   onCollapseExpand = () => {
@@ -73,146 +58,32 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   onCheckChange = (event: MatCheckboxChange) => {
-    // cannot be indeterminate as selection is done
-    this.node.indeterminate = false;
-    // set new checked value
-    this.node.checked = event.checked;
-    // set the same checked value for all the children
-    this.changeChildren(this.node);
+    // set new check status
+    this.node.setChecked(event.checked);
     // notify parent of the change
     this.checkChange.emit(this.node);
 
-    if (this.config.checkedValue == CHECKED_VALUE_HIGHEST_SELECTED) {
-      this.checkboxSelect.emit(this.checkedHighest(this.node));
-    } else if (this.config.checkedValue == CHECKED_VALUE_LEAVES) {
-      this.checkboxSelect.emit(this.checkedLeaves(this.node));
-    } else {
-      // selected values all
-      this.checkboxSelect.emit(this.checkedAll(this.node));
-    }
+    this.checkboxSelect.emit(this.node.getCheckedValues(this.config.checkedValue));
 
-  }
-
-  private checkedLeaves(node: Node): any[] {
-    if (!node.checked && !node.indeterminate) {
-      return [];
-    }
-    if (node.children) {
-      let values = [];
-      node.children.forEach(n => {
-        this.checkedLeaves(n).forEach(v => values.push(v));
-      });
-      return values;
-    } else {
-      return [node.value];
-    }
-  }
-
-  private checkedAll(node: Node): any[] {
-    if (!node.checked && !node.indeterminate) {
-      return [];
-    }
-    if (node.children) {
-      let values = [];
-      if (node.checked) {
-        values.push(node.value);
-      }
-      node.children.forEach(n => {
-        this.checkedAll(n).forEach(v => values.push(v));
-      });
-      return values;
-    } else {
-      return [node.value];
-    }
-  }
-
-  private checkedHighest(node: Node): any[] {
-    if (node.checked) {
-      return [node.value]
-    }
-    if (node.children) {
-      let values = [];
-      node.children.forEach(n => {
-        this.checkedHighest(n).forEach(v => values.push(v));
-      });
-      return values;
-    }
-    return [];
   }
 
   private childCheckboxSelected(values: any[]) {
-
-    if (this.config.checkedValue == CHECKED_VALUE_HIGHEST_SELECTED) {
-      this.checkboxSelect.emit(this.checkedHighest(this.node));
-    } else if (this.config.checkedValue == CHECKED_VALUE_LEAVES) {
-      this.checkboxSelect.emit(this.checkedLeaves(this.node));
-    } else {
-      // selected values all
-      this.checkboxSelect.emit(this.checkedAll(this.node));
-    }
+    this.checkboxSelect.emit(this.node.getCheckedValues(this.config.checkedValue));
   }
 
-  public getCheckedValues() {
-    if (this.config.checkedValue == CHECKED_VALUE_HIGHEST_SELECTED) {
-      return this.checkedHighest(this.node);
-    } else if (this.config.checkedValue == CHECKED_VALUE_LEAVES) {
-      return this.checkedLeaves(this.node);
-    } else {
-      // selected values all
-      return this.checkedAll(this.node);
-    }
-  }
-
-  /**
-   * recursively set the value of all the children same as the parent
-   * @param node 
-   */
-  private changeChildren(node: Node) {
-    if (node == null || node.children == null) {
-      return;
-    }
-
-    node.children.forEach(n => {
-      n.checked = node.checked;
-      n.indeterminate = false;
-      this.changeChildren(n);
-    });
+  public getCheckedValues(): any[] {
+    return this.node.getCheckedValues(this.config.checkedValue);
   }
 
   private onChildCheckChange(child) {
 
-    this.checkChildren(this.node);
+    this.node.checkImmediateChildren();
 
     // notify parent of the change
     this.checkChange.emit(this.node);
   }
 
-  private checkChildren(node: Node) {
-    let checkedChildren: number = node.children.filter(n => n.checked).length;
 
-    let indeterminateChildren: number = node.children.filter(n => n.indeterminate).length;
-
-    if (indeterminateChildren > 0) {
-      // if indeterminate child the indeterminate
-      node.checked = false;
-      node.indeterminate = true;
-    } else {
-      // if no indeterminate child
-      node.indeterminate = false;
-      if (checkedChildren == node.children.length) {
-        // if all checked then checked
-        node.checked = true;
-      } else if (checkedChildren == 0) {
-        // if all unchecked then unchecked
-        node.checked = false;
-      } else {
-        // if not all checked then indeterminate
-        node.checked = false;
-        node.indeterminate = true;
-      }
-    }
-
-  }
 
   onDelete = (value: any) => {
 
