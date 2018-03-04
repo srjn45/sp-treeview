@@ -13,9 +13,9 @@ export class SpTreeviewComponent implements OnInit {
   @Input() nodes: Node[];
   @Input() config: Config = new Config();
 
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() change: EventEmitter<Node[]> = new EventEmitter<Node[]>();
 
-  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() delete: EventEmitter<Node> = new EventEmitter<Node>();
   @Output() addChild: EventEmitter<Node> = new EventEmitter<Node>();
 
   @ViewChildren('tree') trees: QueryList<SpTreeviewNodeComponent>;
@@ -26,14 +26,20 @@ export class SpTreeviewComponent implements OnInit {
 
   }
 
+  public getSelectedValues(): Node[] {
+    let values: Node[];
+    this.nodes.forEach(n => n.getCheckedValues(this.config.checkedValue).forEach(v => values.push(v)));
+    return values;
+  }
+
   onFilter(event: Event) {
-    this.trees.forEach(t => t.filter((<HTMLInputElement>event.srcElement).value));
+    this.applyFilter((<HTMLInputElement>event.srcElement).value);
   }
   applyFilter(text: string) {
     this.trees.forEach(t => t.filter(text));
   }
 
-  onChange(event) {
+  onChange(nodes: Node[]) {
     if (this.config.select == SELECT_CHECKBOX) {
       let values = [];
       this.trees.forEach(t => {
@@ -41,22 +47,36 @@ export class SpTreeviewComponent implements OnInit {
       });
       this.change.emit(values);
     } else if (this.config.select == SELECT_RADIO) {
-      this.change.emit(event);
+      this.change.emit(nodes);
     }
   }
 
-  onDelete(value) {
+  onDelete(node) {
     if (this.nodes != null) {
-      let index = this.nodes.findIndex(x => x.value == value);
+      let index = this.nodes.findIndex(x => x.value == node.value);
       if (index != -1) {
         this.nodes.splice(index, 1);
       }
     }
-    this.delete.emit(value);
+    this.delete.emit(node);
+
+    let values = [];
+    this.trees.forEach(t => {
+      t.getCheckedValues().forEach(v => values.push(v))
+    });
+    this.change.emit(values);
   }
 
   onAddChild(node: Node) {
     this.addChild.emit(node);
+
+    let values = [];
+    this.trees.forEach(t => {
+      t.node.verifyChildrenRecursive();
+      t.getCheckedValues().forEach(v => values.push(v));
+    });
+    this.change.emit(values);
+
   }
 
 }
