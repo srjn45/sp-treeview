@@ -1,0 +1,43 @@
+.base {
+    position: relative;
+}
+
+.full-width {
+    width: 100%;
+}
+.pointer {
+    cursor: pointer;
+}
+.dropDown {
+    background: white;
+    position: absolute;
+    padding: 10px;
+    top: 60px;
+    width: calc(100% - 20px);
+    overflow: auto;
+    box-shadow: 0px 1px 2px 0px grey;
+    z-index: 1010;
+}
+.cvr-screen {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+.liftup {
+    z-index: 1010;
+}
+
+input.mat-chip-input {
+    display: none !important;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    height: 32px;
+}
