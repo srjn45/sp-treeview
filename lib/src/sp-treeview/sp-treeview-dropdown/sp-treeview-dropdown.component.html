@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="base">
+  <mat-form-field class="full-width pointer" [class.liftup]="dropDown" (click)="dropDown=!dropDown">
+
+    <button matPrefix mat-icon-button (click)="scrollLeft($event)" color="primary">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+
+    <mat-chip-list color="primary" #chipList>
+      <mat-chip color="primary" *ngFor="let node of selectedNodes" [selectable]="selectable" [removable]="removable" (remove)="remove(node)"
+        (click)="$event.stopPropagation()">
+        {{ node.name.replace(' ',"&nbsp;") }}
+        <mat-icon color="warn" matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+
+    <button matSuffix mat-icon-button (click)="scrollRight($event)" color="primary">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+    <button matSuffix mat-icon-button color="primary">
+      <mat-icon *ngIf="!dropDown" matSuffix>arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="dropDown" matSuffix>arrow_drop_up</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="dropDown" *ngIf="dropDown" [style.height]="config.height">
+    <sp-treeview [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview>
+  </div>
+</div>
+
+<div class="cvr-screen" *ngIf="dropDown" (click)="$event.stopPropagation();dropDown=!dropDown;"></div>

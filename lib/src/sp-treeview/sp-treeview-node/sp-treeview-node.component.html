@@ -1,0 +1,36 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<ng-template #nodeTemplate let-node="node" let-config="config" let-onCollapseExpand="onCollapseExpand" let-onCheckChange="onCheckChange" let-onRadioChange="onRadioChange"
+  let-onDelete="onDelete" let-onAddChild="onAddChild">
+  <div class="tree-node">
+    <button mat-button mat-icon-button *ngIf="node.children" (click)="onCollapseExpand()" color="primary">
+      <mat-icon *ngIf="node.collapsed">keyboard_arrow_right</mat-icon>
+      <mat-icon *ngIf="!node.collapsed">keyboard_arrow_down</mat-icon>
+    </button>
+    <span *ngIf="node.children==null">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+    <mat-radio-button *ngIf="config.select==SELECT_RADIO" [checked]="node.checked" [value]="node" [disabled]="node.disabled"
+      (change)="onRadioChange($event)">
+      &nbsp;{{node.name}}
+    </mat-radio-button>
+    <mat-checkbox *ngIf="config.select==SELECT_CHECKBOX" [checked]="node.checked" [value]="node.value" [indeterminate]="node.indeterminate"
+      [disabled]="node.disabled" (change)="onCheckChange($event)">
+      &nbsp;{{node.name}}
+    </mat-checkbox>
+    <label *ngIf="config.select==SELECT_NONE">
+      &nbsp;{{node.name}}&nbsp;&nbsp;
+    </label>
+    <mat-icon class="clickable" *ngIf="config.addChild && (config.addChildOnLeaves || node.children)" color="primary" (click)="onAddChild(node)">add_to_photos</mat-icon>
+    <mat-icon class="clickable" *ngIf="config.deleteNode" color="warn" (click)="onDelete(node)">delete</mat-icon>
+  </div>
+</ng-template>
+<div class="node-base" [class.hide]="hide">
+  <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{node: node, config: config, onCollapseExpand: onCollapseExpand, onCheckChange: onCheckChange, onRadioChange: onRadioChange, onDelete: onDelete, onAddChild: onAddChild}">
+  </ng-template>
+
+  <div class="node-child" *ngIf="!node.collapsed">
+    <sp-treeview-node *ngFor="let child of node.children" [node]="child" [config]="config" (checkChange)="onChildCheckChange($event)"
+      (radioSelect)="childRadioSelected($event)" (checkboxSelect)="childCheckboxSelected($event)" (delete)="onDelete($event)"
+      (addChild)="onAddChild($event)">
+    </sp-treeview-node>
+  </div>
+</div>

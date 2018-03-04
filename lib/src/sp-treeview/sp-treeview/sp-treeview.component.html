@@ -1,0 +1,19 @@
+<div class="treeview-base">
+  <div class="treeview-header">
+    <mat-form-field *ngIf="config.filter">
+      <input #filter matInput placeholder="Filter" (keyup)="onFilter($event)">
+      <button mat-button mat-icon-button matPrefix color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-button mat-icon-button matSuffix color="warn" (click)="$event.stopPropagation();filter.value=null;applyFilter('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="treeview-content">
+    <mat-radio-group>
+      <sp-treeview-node #tree *ngFor="let node of nodes;let i = index" [node]="node" [config]="config" (radioSelect)="onChange($event)"
+        (checkboxSelect)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview-node>
+    </mat-radio-group>
+  </div>
+</div>

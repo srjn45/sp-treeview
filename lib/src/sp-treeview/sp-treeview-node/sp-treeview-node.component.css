@@ -1,0 +1,21 @@
+.node-base {
+    position: relative;
+}
+.node-child{
+    position: relative;
+    margin-left: 30px;
+}
+.tree-node {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}

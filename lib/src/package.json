@@ -1,0 +1,28 @@
+{
+  "name": "sp-treeview",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srjn45/sp-treeview"
+  },
+  "author": {
+    "name": "srjn45",
+    "email": "srajanpathak45@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srjn45/sp-treeview/issues"
+  },
+  "main": "sp-treeview.umd.js",
+  "module": "sp-treeview.js",
+  "jsnext:main": "sp-treeview.js",
+  "typings": "sp-treeview.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
