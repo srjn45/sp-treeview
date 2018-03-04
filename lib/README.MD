@@ -24,8 +24,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-// Import your library
-import { SampleModule } from 'sp-treeview';
+// Import SpTreeviewModule
+import { SpTreeviewModule } from 'sp-treeview';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,8 @@ import { SampleModule } from 'sp-treeview';
   imports: [
     BrowserModule,
 
-    // Specify your library as an import
-    LibraryModule
+    // Specify SpTreeviewModule as an import
+    SpTreeviewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -43,14 +43,19 @@ import { SampleModule } from 'sp-treeview';
 export class AppModule { }
 ```
 
-Once your library is imported, you can use its components, directives and pipes in your Angular application:
+Once your library is imported, you can use its components in your Angular application:
 
 ```xml
 <!-- You can now use your library component in app.component.html -->
 <h1>
   {{title}}
 </h1>
-<sampleComponent></sampleComponent>
+
+<sp-treeview [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview>
+
+or
+
+<sp-treeview-dropdown [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview-dropdown>
 ```
 
 ## Development

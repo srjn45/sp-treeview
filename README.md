@@ -9,6 +9,64 @@ Tree view component in material design for Angular 5
 - delete node
 - add child node
 
+## Installation
+
+To install this library, run:
+
+```bash
+$ npm install sp-treeview --save
+```
+
+## Consuming your library
+
+Once you have published your library to npm, you can import your library in any Angular application by running:
+
+```bash
+$ npm install sp-treeview
+```
+
+and then from your Angular `AppModule`:
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+// Import SpTreeviewModule
+import { SpTreeviewModule } from 'sp-treeview';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+
+    // Specify SpTreeviewModule as an import
+    SpTreeviewModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Once your library is imported, you can use its components in your Angular application:
+
+```xml
+<!-- You can now use your library component in app.component.html -->
+<h1>
+  {{title}}
+</h1>
+
+<sp-treeview [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview>
+
+or
+
+<sp-treeview-dropdown [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview-dropdown>
+```
+
 ## Usage
 
 - sp-treeview/sp-treeview-dropdown takes Node[] and Config as input
@@ -50,3 +108,8 @@ Config is used to show/hide template elements or change functionality
 - filter: boolean - (default: true) show/hide filter
 - height: string - (default: "auto") height of the dropdown
 - showDropdownDefault: boolean - (default: false) show/hide dropdown by default
+
+
+## License
+
+MIT © [srjn45](mailto:srajanpathak45@gmail.com)
