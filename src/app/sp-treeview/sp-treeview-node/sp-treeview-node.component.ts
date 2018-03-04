@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList, TemplateRef } from '@angular/core';
 import { Node } from '../model/node';
 import { Config, CHECKED_VALUE_ALL, CHECKED_VALUE_LEAVES, CHECKED_VALUE_HIGHEST_SELECTED } from '../model/config';
 import { SELECT_CHECKBOX, SELECT_NONE, SELECT_RADIO } from "../model/config";
 import { MatCheckboxChange, MatRadioChange } from '@angular/material';
+import { SpTreeviewNodeTemplate } from './sp-treeview-node-template';
 
 @Component({
   selector: 'sp-treeview-node',
@@ -19,15 +20,16 @@ export class SpTreeviewNodeComponent implements OnInit {
 
   @Input() public node: Node;
   @Input() public config: Config = new Config();
+  @Input() public template: TemplateRef<SpTreeviewNodeTemplate>;
 
   @Output() public checkChange: EventEmitter<Node> = new EventEmitter<Node>();
 
-  @Output() public radioSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public radioSelect: EventEmitter<Node[]> = new EventEmitter<Node[]>();
 
-  @Output() public checkboxSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public checkboxSelect: EventEmitter<Node[]> = new EventEmitter<Node[]>();
 
 
-  @Output() public delete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public delete: EventEmitter<Node> = new EventEmitter<Node>();
   @Output() public addChild: EventEmitter<Node> = new EventEmitter<Node>();
 
   @ViewChildren(SpTreeviewNodeComponent) children: QueryList<SpTreeviewNodeComponent>;
@@ -50,11 +52,11 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   onRadioChange = (event: MatRadioChange) => {
-    this.radioSelect.emit(event.value);
+    this.radioSelect.emit([event.value]);
   }
 
-  private childRadioSelected(value) {
-    this.radioSelect.emit(value);
+  private childRadioSelected(nodes: Node[]) {
+    this.radioSelect.emit(nodes);
   }
 
   onCheckChange = (event: MatCheckboxChange) => {
@@ -85,15 +87,15 @@ export class SpTreeviewNodeComponent implements OnInit {
 
 
 
-  onDelete = (value: any) => {
+  onDelete = (node: Node) => {
 
     if (this.node.children != null) {
-      let index = this.node.children.findIndex(x => x.value == value);
+      let index = this.node.children.findIndex(x => x.value == node.value);
       if (index != -1) {
         this.node.children.splice(index, 1);
       }
     }
-    this.delete.emit(value);
+    this.delete.emit(node);
   }
 
   onAddChild = (node: Node) => {
@@ -103,7 +105,7 @@ export class SpTreeviewNodeComponent implements OnInit {
   filter(text: string): boolean {
 
     if (this.node.children == null) {
-      if (this.node.text.toLowerCase().startsWith(text.toLowerCase())) {
+      if (this.node.name.toLowerCase().startsWith(text.toLowerCase())) {
         this.hide = false;
         return true;
       } else {
@@ -122,7 +124,7 @@ export class SpTreeviewNodeComponent implements OnInit {
         this.hide = false;
         return true;
       } else {
-        if (this.node.text.toLowerCase().startsWith(text.toLowerCase())) {
+        if (this.node.name.toLowerCase().startsWith(text.toLowerCase())) {
           this.hide = false;
           return true;
         } else {
