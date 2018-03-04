@@ -3,7 +3,7 @@ import { CHECKED_VALUE_HIGHEST_SELECTED, CHECKED_VALUE_LEAVES } from "./config";
 export class Node {
 
     constructor(
-        public text: string,
+        public name: string,
         public value: any,
         public children?: Node[],
         public checked: boolean = false,
@@ -73,7 +73,7 @@ export class Node {
         }
     }
 
-    public checkedLeaves(): any[] {
+    public checkedLeaves(): Node[] {
         if (!this.checked && !this.indeterminate) {
             return [];
         }
@@ -84,31 +84,31 @@ export class Node {
             });
             return values;
         } else {
-            return [this.value];
+            return [this];
         }
     }
 
-    public checkedAll(): any[] {
+    public checkedAll(): Node[] {
         if (!this.checked && !this.indeterminate) {
             return [];
         }
         if (this.children) {
             let values = [];
             if (this.checked) {
-                values.push(this.value);
+                values.push(this);
             }
             this.children.forEach(n => {
                 n.checkedAll().forEach(v => values.push(v));
             });
             return values;
         } else {
-            return [this.value];
+            return [this];
         }
     }
 
-    public checkedHighest(): any[] {
+    public checkedHighest(): Node[] {
         if (this.checked) {
-            return [this.value]
+            return [this]
         }
         if (this.children) {
             let values = [];
@@ -120,7 +120,7 @@ export class Node {
         return [];
     }
 
-    public getCheckedValues(checkedValue: number): any[] {
+    public getCheckedValues(checkedValue: number): Node[] {
         if (checkedValue == CHECKED_VALUE_HIGHEST_SELECTED) {
             return this.checkedHighest();
         } else if (checkedValue == CHECKED_VALUE_LEAVES) {
