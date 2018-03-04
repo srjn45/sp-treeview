@@ -37,4 +37,4 @@ Tree is consist of nodes, each node contains
 Config is used to show/hide template elements or change functionality
 
 - select: number - (SELECT_NONE, SELECT_CHECKBOX, SELECT_RADIO)
-    --SELECT_NONE - simple tree
+- - SELECT_NONE - simple tree
