@@ -15,7 +15,9 @@ export class Config {
         public deleteNode: boolean = true,
         public addChild: boolean = true,
         public addChildOnLeaves: boolean = false,
-        public filter: boolean = true
+        public filter: boolean = true,
+        public height: string = "auto",
+        public showDropdownDefault = true
     ) { }
 
 }
