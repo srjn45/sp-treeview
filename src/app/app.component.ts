@@ -60,7 +60,7 @@ export class AppComponent {
     ])
   ];
 
-  public config: Config = new Config(SELECT_CHECKBOX, CHECKED_VALUE_HIGHEST_SELECTED);
+  public config: Config = new Config(SELECT_CHECKBOX, CHECKED_VALUE_HIGHEST_SELECTED, true, true, false, true, '400px');
 
   constructor() {
     console.log(this.config);
