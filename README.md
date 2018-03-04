@@ -36,5 +36,17 @@ Tree is consist of nodes, each node contains
 
 Config is used to show/hide template elements or change functionality
 
-- select: number - (SELECT_NONE, SELECT_CHECKBOX, SELECT_RADIO)
+- select: number - (default: SELECT_NONE)
     - SELECT_NONE - simple tree
+    - SELECT_CHECKBOX - tree nodes with checkboxex
+    - SELECT_RADIO - tree nodes with radio button
+- checkedValue: number - (default: CHECKED_VALUE_ALL) which values need to be emitted in change event (only valid in case of SELECT_CHECKBOX)
+    - CHECKED_VALUE_ALL - all selected nodes
+    - CHECKED_VALUE_LEAVES - only the selected leave nodes
+    - CHECKED_VALUE_HIGHEST_SELECTED - highest selected checkbox in every isolated branch
+- deleteNode: boolean - (default: false) show/hide delete button
+- addChild: boolean - (default: false) show/hide addChild button
+- addChildOnLeaves: boolean - (default: false) show/hide addChild button on leave nodes
+- filter: boolean - (default: true) show/hide filter
+- height: string - (default: "auto") height of the dropdown
+- showDropdownDefault: boolean - (default: false) show/hide dropdown by default
