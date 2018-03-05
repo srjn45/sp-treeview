@@ -96,7 +96,7 @@ Config is used to show/hide template elements or change functionality
 
 - select: number - (default: SELECT_NONE)
     - SELECT_NONE - simple tree
-    - SELECT_CHECKBOX - tree nodes with checkboxex
+    - SELECT_CHECKBOX - tree nodes with checkboxes
     - SELECT_RADIO - tree nodes with radio button
 - checkedValue: number - (default: CHECKED_VALUE_ALL) which values need to be emitted in change event (only valid in case of SELECT_CHECKBOX)
     - CHECKED_VALUE_ALL - all selected nodes
