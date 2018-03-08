@@ -12,12 +12,12 @@ export class Config {
     constructor(
         public select: number = SELECT_NONE,
         public checkedValue: number = CHECKED_VALUE_LEAVES,
-        public deleteNode: boolean = true,
-        public addChild: boolean = true,
+        public deleteNode: boolean = false,
+        public addChild: boolean = false,
         public addChildOnLeaves: boolean = false,
         public filter: boolean = true,
         public height: string = "auto",
-        public showDropdownDefault = true
+        public showDropdownDefault = false
     ) { }
 
 }
