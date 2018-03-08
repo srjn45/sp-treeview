@@ -40,21 +40,21 @@ export class SpTreeviewComponent implements OnInit {
   }
 
   onChange(nodes: Node[]) {
-    if (this.config.select == SELECT_CHECKBOX) {
+    if (this.config.select === SELECT_CHECKBOX) {
       let values = [];
       this.trees.forEach(t => {
         t.getCheckedValues().forEach(v => values.push(v))
       });
       this.change.emit(values);
-    } else if (this.config.select == SELECT_RADIO) {
+    } else if (this.config.select === SELECT_RADIO) {
       this.change.emit(nodes);
     }
   }
 
   onDelete(node) {
     if (this.nodes != null) {
-      let index = this.nodes.findIndex(x => x.value == node.value);
-      if (index != -1) {
+      let index = this.nodes.findIndex(x => x.value === node.value);
+      if (index !== -1) {
         this.nodes.splice(index, 1);
       }
     }

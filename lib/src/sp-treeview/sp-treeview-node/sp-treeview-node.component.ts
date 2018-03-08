@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList, TemplateRef } from '@angular/core';
 import { Node } from '../model/node';
-import { Config, CHECKED_VALUE_ALL, CHECKED_VALUE_LEAVES, CHECKED_VALUE_HIGHEST_SELECTED } from '../model/config';
-import { SELECT_CHECKBOX, SELECT_NONE, SELECT_RADIO } from "../model/config";
+import { Config } from '../model/config';
+import { SELECT_CHECKBOX, SELECT_NONE, SELECT_RADIO } from '../model/config';
 import { MatCheckboxChange, MatRadioChange } from '@angular/material';
 import { SpTreeviewNodeTemplate } from './sp-treeview-node-template';
 
@@ -12,11 +12,11 @@ import { SpTreeviewNodeTemplate } from './sp-treeview-node-template';
 })
 export class SpTreeviewNodeComponent implements OnInit {
 
-  private SELECT_CHECKBOX = SELECT_CHECKBOX;
-  private SELECT_RADIO = SELECT_RADIO;
-  private SELECT_NONE = SELECT_NONE;
+  public SELECT_CHECKBOX = SELECT_CHECKBOX;
+  public SELECT_RADIO = SELECT_RADIO;
+  public SELECT_NONE = SELECT_NONE;
 
-  public hide: boolean = false;
+  public hide = false;
 
   @Input() public node: Node;
   @Input() public config: Config = new Config();
@@ -39,9 +39,9 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.config.select == this.SELECT_CHECKBOX) {
+    if (this.config.select === this.SELECT_CHECKBOX) {
       this.node.verifyChildrenRecursive();
-    } else if (this.config.select == this.SELECT_RADIO) {
+    } else if (this.config.select === this.SELECT_RADIO) {
       // can check if multiple nodes are selected then log the error
     }
 
@@ -55,7 +55,7 @@ export class SpTreeviewNodeComponent implements OnInit {
     this.radioSelect.emit([event.value]);
   }
 
-  private childRadioSelected(nodes: Node[]) {
+  public childRadioSelected(nodes: Node[]) {
     this.radioSelect.emit(nodes);
   }
 
@@ -69,7 +69,7 @@ export class SpTreeviewNodeComponent implements OnInit {
 
   }
 
-  private childCheckboxSelected(values: any[]) {
+  public childCheckboxSelected(values: any[]) {
     this.checkboxSelect.emit(this.node.getCheckedValues(this.config.checkedValue));
   }
 
@@ -77,7 +77,7 @@ export class SpTreeviewNodeComponent implements OnInit {
     return this.node.getCheckedValues(this.config.checkedValue);
   }
 
-  private onChildCheckChange(child) {
+  public onChildCheckChange(child) {
 
     this.node.checkImmediateChildren();
 
@@ -90,8 +90,8 @@ export class SpTreeviewNodeComponent implements OnInit {
   onDelete = (node: Node) => {
 
     if (this.node.children != null) {
-      let index = this.node.children.findIndex(x => x.value == node.value);
-      if (index != -1) {
+      let index = this.node.children.findIndex(x => x.value === node.value);
+      if (index !== -1) {
         this.node.children.splice(index, 1);
       }
     }

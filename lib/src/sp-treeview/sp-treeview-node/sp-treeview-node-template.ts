@@ -1,5 +1,5 @@
-import { Node } from "../model/node";
-import { Config } from "../model/config";
+import { Node } from '../model/node';
+import { Config } from '../model/config';
 
 export interface SpTreeviewNodeTemplate {
     node: Node;

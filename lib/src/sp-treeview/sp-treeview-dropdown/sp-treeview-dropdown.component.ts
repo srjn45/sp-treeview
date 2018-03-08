@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Config, SELECT_CHECKBOX, SELECT_RADIO } from '../model/config';
+import { Config } from '../model/config';
 import { SpTreeviewComponent } from '../sp-treeview/sp-treeview.component';
 
-import { Node } from "../model/node";
+import { Node } from '../model/node';
 
 @Component({
   selector: 'sp-treeview-dropdown',
@@ -25,13 +25,13 @@ export class SpTreeviewDropdownComponent implements OnInit {
   public chipList: any;
   private chipsDiv: HTMLDivElement;
 
-  visible: boolean = true;
-  selectable: boolean = false;
-  removable: boolean = true;
+  visible = true;
+  selectable = false;
+  removable = true;
 
   selectedNodes: Node[] = [];
 
-  public dropDown: boolean = false;
+  public dropDown = false;
 
 
   constructor() { }
@@ -55,8 +55,8 @@ export class SpTreeviewDropdownComponent implements OnInit {
   remove(node: Node): void {
     this.dropDown = !this.dropDown;
     node.setChecked(false);
-    let index = this.selectedNodes.findIndex(n => n == node);
-    if (index != -1) {
+    let index = this.selectedNodes.findIndex(n => n === node);
+    if (index !== -1) {
       this.selectedNodes.splice(index, 1);
     }
     let values = [];
