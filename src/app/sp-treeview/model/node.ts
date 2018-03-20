@@ -1,16 +1,6 @@
-import { CHECKED_VALUE_HIGHEST_SELECTED, CHECKED_VALUE_LEAVES } from "./config";
+import { CHECKED_VALUE_HIGHEST_SELECTED, CHECKED_VALUE_LEAVES } from './config';
 
 export class Node {
-
-    constructor(
-        public name: string,
-        public value: any,
-        public children?: Node[],
-        public checked: boolean = false,
-        public collapsed: boolean = false,
-        public disabled: boolean = false,
-        public indeterminate: boolean = false
-    ) { }
 
     public static nodify(node: Node) {
         node = Object.setPrototypeOf(node, Node.prototype);
@@ -18,6 +8,17 @@ export class Node {
             node.children.forEach(n => this.nodify(n));
         }
     }
+
+    constructor(
+        public name: string,
+        public value: any,
+        public children?: Node[],
+        public checked = false,
+        public collapsed = false,
+        public disabled = false,
+        public indeterminate = false
+    ) { }
+
 
     public verifyChildrenRecursive() {
         if (this.children == null) {
@@ -66,10 +67,10 @@ export class Node {
         } else {
             // if no indeterminate child
             this.indeterminate = false;
-            if (checkedChildren == this.children.length) {
+            if (checkedChildren === this.children.length) {
                 // if all checked then checked
                 this.checked = true;
-            } else if (checkedChildren == 0) {
+            } else if (checkedChildren === 0) {
                 // if all unchecked then unchecked
                 this.checked = false;
             } else {
@@ -128,9 +129,9 @@ export class Node {
     }
 
     public getCheckedValues(checkedValue: number): Node[] {
-        if (checkedValue == CHECKED_VALUE_HIGHEST_SELECTED) {
+        if (checkedValue === CHECKED_VALUE_HIGHEST_SELECTED) {
             return this.checkedHighest();
-        } else if (checkedValue == CHECKED_VALUE_LEAVES) {
+        } else if (checkedValue === CHECKED_VALUE_LEAVES) {
             return this.checkedLeaves();
         } else {
             // selected values all
