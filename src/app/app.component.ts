@@ -10,6 +10,15 @@ import { Config, SELECT_CHECKBOX, SELECT_RADIO, CHECKED_VALUE_HIGHEST_SELECTED, 
 export class AppComponent {
 
   nodes: Node[] = [
+    <Node>{
+      name: "java",
+      value: {},
+      children: [
+        { name: "srjn", value: {} },
+        { name: "pryl", value: {} },
+        { name: "rkshr", value: {} }
+      ]
+    },
     new Node("Electronics", 1, [
       new Node("Mobile Phones", 11, [
         new Node("Pixel 2 XL", 111),
