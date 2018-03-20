@@ -39,6 +39,7 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
+    Node.nodify(this.node);
     if (this.config.select == this.SELECT_CHECKBOX) {
       this.node.verifyChildrenRecursive();
     } else if (this.config.select == this.SELECT_RADIO) {
