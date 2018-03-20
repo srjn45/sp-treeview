@@ -12,9 +12,9 @@ import { SpTreeviewNodeTemplate } from './sp-treeview-node-template';
 })
 export class SpTreeviewNodeComponent implements OnInit {
 
-  public SELECT_CHECKBOX = SELECT_CHECKBOX;
-  public SELECT_RADIO = SELECT_RADIO;
-  public SELECT_NONE = SELECT_NONE;
+  private SELECT_CHECKBOX = SELECT_CHECKBOX;
+  private SELECT_RADIO = SELECT_RADIO;
+  private SELECT_NONE = SELECT_NONE;
 
   public hide = false;
 
@@ -39,6 +39,8 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.SELECT_NONE);
+    Node.nodify(this.node);
     if (this.config.select === this.SELECT_CHECKBOX) {
       this.node.verifyChildrenRecursive();
     } else if (this.config.select === this.SELECT_RADIO) {
@@ -55,7 +57,7 @@ export class SpTreeviewNodeComponent implements OnInit {
     this.radioSelect.emit([event.value]);
   }
 
-  public childRadioSelected(nodes: Node[]) {
+  childRadioSelected(nodes: Node[]) {
     this.radioSelect.emit(nodes);
   }
 
@@ -69,7 +71,7 @@ export class SpTreeviewNodeComponent implements OnInit {
 
   }
 
-  public childCheckboxSelected(values: any[]) {
+  childCheckboxSelected(values: any[]) {
     this.checkboxSelect.emit(this.node.getCheckedValues(this.config.checkedValue));
   }
 
@@ -77,7 +79,7 @@ export class SpTreeviewNodeComponent implements OnInit {
     return this.node.getCheckedValues(this.config.checkedValue);
   }
 
-  public onChildCheckChange(child) {
+  onChildCheckChange(child) {
 
     this.node.checkImmediateChildren();
 

@@ -2,6 +2,13 @@ import { CHECKED_VALUE_HIGHEST_SELECTED, CHECKED_VALUE_LEAVES } from './config';
 
 export class Node {
 
+    public static nodify(node: Node) {
+        node = Object.setPrototypeOf(node, Node.prototype);
+        if (node.children != null) {
+            node.children.forEach(n => this.nodify(n));
+        }
+    }
+
     constructor(
         public name: string,
         public value: any,
@@ -11,6 +18,7 @@ export class Node {
         public disabled = false,
         public indeterminate = false
     ) { }
+
 
     public verifyChildrenRecursive() {
         if (this.children == null) {

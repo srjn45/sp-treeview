@@ -34,10 +34,15 @@ export class SpTreeviewDropdownComponent implements OnInit {
   public dropDown = false;
 
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
-    this.nodes.forEach(n => n.getCheckedValues(this.config.checkedValue).forEach(v => this.selectedNodes.push(v)));
+    this.nodes.forEach(n => {
+      Node.nodify(n);
+      n.getCheckedValues(this.config.checkedValue).forEach(v => this.selectedNodes.push(v))
+    });
     this.chipsDiv = this.chipList._elementRef.nativeElement.children[0];
     this.dropDown = this.config.showDropdownDefault;
   }

@@ -23,7 +23,7 @@ export class SpTreeviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    this.nodes.forEach(n => Node.nodify(n));
   }
 
   public getSelectedValues(): Node[] {
