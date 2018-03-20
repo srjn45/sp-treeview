@@ -12,6 +12,13 @@ export class Node {
         public indeterminate: boolean = false
     ) { }
 
+    public static nodify(node: Node) {
+        node = Object.setPrototypeOf(node, Node.prototype);
+        if (node.children != null) {
+            node.children.forEach(n => this.nodify(n));
+        }
+    }
+
     public verifyChildrenRecursive() {
         if (this.children == null) {
             return;
