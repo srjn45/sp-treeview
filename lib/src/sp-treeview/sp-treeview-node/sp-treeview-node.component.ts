@@ -12,9 +12,9 @@ import { SpTreeviewNodeTemplate } from './sp-treeview-node-template';
 })
 export class SpTreeviewNodeComponent implements OnInit {
 
-  private SELECT_CHECKBOX = SELECT_CHECKBOX;
-  private SELECT_RADIO = SELECT_RADIO;
-  private SELECT_NONE = SELECT_NONE;
+  public SELECT_CHECKBOX = SELECT_CHECKBOX;
+  public SELECT_RADIO = SELECT_RADIO;
+  public SELECT_NONE = SELECT_NONE;
 
   public hide = false;
 
@@ -39,7 +39,6 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.SELECT_NONE);
     Node.nodify(this.node);
     if (this.config.select === this.SELECT_CHECKBOX) {
       this.node.verifyChildrenRecursive();
