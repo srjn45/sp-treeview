@@ -2,7 +2,7 @@
 <div class="base">
   <mat-form-field class="full-width pointer" [class.liftup]="dropDown" (click)="dropDown=!dropDown">
 
-    <button matPrefix mat-icon-button (click)="scrollLeft($event)" color="primary">
+    <button type="button" matPrefix mat-icon-button (click)="scrollLeft($event)" color="primary">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
 
@@ -14,10 +14,10 @@
       </mat-chip>
     </mat-chip-list>
 
-    <button matSuffix mat-icon-button (click)="scrollRight($event)" color="primary">
+    <button type="button" matSuffix mat-icon-button (click)="scrollRight($event)" color="primary">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
-    <button matSuffix mat-icon-button color="primary">
+    <button type="button" matSuffix mat-icon-button color="primary">
       <mat-icon *ngIf="!dropDown" matSuffix>arrow_drop_down</mat-icon>
       <mat-icon *ngIf="dropDown" matSuffix>arrow_drop_up</mat-icon>
     </button>

@@ -2,7 +2,7 @@
 <ng-template #nodeTemplate let-node="node" let-config="config" let-onCollapseExpand="onCollapseExpand" let-onCheckChange="onCheckChange" let-onRadioChange="onRadioChange"
   let-onDelete="onDelete" let-onAddChild="onAddChild">
   <div class="tree-node">
-    <button mat-button mat-icon-button *ngIf="node.children" (click)="onCollapseExpand()" color="primary">
+    <button type="button" mat-button mat-icon-button *ngIf="node.children" (click)="onCollapseExpand()" color="primary">
       <mat-icon *ngIf="node.collapsed">keyboard_arrow_right</mat-icon>
       <mat-icon *ngIf="!node.collapsed">keyboard_arrow_down</mat-icon>
     </button>

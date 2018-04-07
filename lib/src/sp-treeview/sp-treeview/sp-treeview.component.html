@@ -2,10 +2,10 @@
   <div class="treeview-header">
     <mat-form-field *ngIf="config.filter">
       <input #filter matInput placeholder="Filter" (keyup)="onFilter($event)">
-      <button mat-button mat-icon-button matPrefix color="primary">
+      <button type="button" mat-button mat-icon-button matPrefix color="primary">
         <mat-icon>search</mat-icon>
       </button>
-      <button mat-button mat-icon-button matSuffix color="warn" (click)="$event.stopPropagation();filter.value=null;applyFilter('')">
+      <button type="button" mat-button mat-icon-button matSuffix color="warn" (click)="$event.stopPropagation();filter.value=null;applyFilter('')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
