@@ -12,6 +12,7 @@
         {{ node.name.replace(' ',"&nbsp;") }}
         <mat-icon color="warn" matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
+      <input mat-input [placeholder]="placeholder" [matChipInputFor]="chipList" [readonly]=true/>
     </mat-chip-list>
 
     <button type="button" matSuffix mat-icon-button (click)="scrollRight($event)" color="primary">
@@ -22,7 +23,8 @@
       <mat-icon *ngIf="dropDown" matSuffix>arrow_drop_up</mat-icon>
     </button>
   </mat-form-field>
-  <div class="dropDown" *ngIf="dropDown" [style.height]="config.height">
+  <!-- <div class="dropDown" *ngIf="dropDown" [style.height]="config.height"> -->
+  <div class="dropDown" [class.slideUp]="!dropDown" [style.height]="config.height">
     <sp-treeview [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview>
   </div>
 </div>
