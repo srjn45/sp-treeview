@@ -19,8 +19,18 @@
     <label *ngIf="config.select==SELECT_NONE">
       &nbsp;{{node.name}}&nbsp;&nbsp;
     </label>
-    <mat-icon class="clickable" *ngIf="config.addChild && (config.addChildOnLeaves || node.children)" color="primary" (click)="onAddChild(node)">add_to_photos</mat-icon>
-    <mat-icon class="clickable" *ngIf="config.deleteNode" color="warn" (click)="onDelete(node)">delete</mat-icon>
+    <span *ngIf="node.addChild!==null||node.addChild!==undefined">
+      <mat-icon class="clickable" *ngIf="node.addChild" color="primary" (click)="onAddChild(node)">add_to_photos</mat-icon>
+    </span>
+    <span *ngIf="node.addChild===null||node.addChild===undefined">
+      <mat-icon class="clickable" *ngIf="config.addChild && (config.addChildOnLeaves || node.children)" color="primary" (click)="onAddChild(node)">add_to_photos</mat-icon>
+    </span>
+    <span *ngIf="node.deleteNode!==null||node.deleteNode!==undefined">
+      <mat-icon class="clickable" *ngIf="node.deleteNode" color="warn" (click)="onDelete(node)">delete</mat-icon>
+    </span>
+    <span *ngIf="node.deleteNode===null||node.deleteNode===undefined">
+      <mat-icon class="clickable" *ngIf="config.deleteNode" color="warn" (click)="onDelete(node)">delete</mat-icon>
+    </span>
   </div>
 </ng-template>
 <div class="node-base" [class.hide]="hide">
