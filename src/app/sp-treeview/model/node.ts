@@ -16,7 +16,9 @@ export class Node {
         public checked = false,
         public collapsed = false,
         public disabled = false,
-        public indeterminate = false
+        public indeterminate = false,
+        public deleteNode?: boolean,
+        public addChild?: boolean
     ) { }
 
 

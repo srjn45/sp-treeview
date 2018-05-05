@@ -14,10 +14,10 @@ export class AppComponent {
       name: "java",
       value: {},
       children: [
-        { name: "srjn", value: {} },
+        { name: "srjn", value: {}, deleteNode: false },
         { name: "pryl", value: {} },
-        { name: "rkshr", value: {} }
-      ]
+        { name: "rkshr", value: {}, addChild: true }
+      ], deleteNode: false
     },
     new Node("Electronics", 1, [
       new Node("Mobile Phones", 11, [
