@@ -105,6 +105,10 @@ MIT © [srjn45](mailto:srajanpathak45@gmail.com)
 
 ## Change Logs
 
+### v0.9.5
+
+> minor bug fixes
+
 ### v0.9.4
 
 > added node level config for deleteNode & addChild
