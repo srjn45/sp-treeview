@@ -62,6 +62,7 @@ export class SpTreeviewDropdownComponent implements OnInit {
   remove(node: Node): void {
     this.dropDown = !this.dropDown;
     node.setChecked(false);
+    this.nodes.forEach(n => n.verifyChildrenRecursive());
     let index = this.selectedNodes.findIndex(n => n === node);
     if (index !== -1) {
       this.selectedNodes.splice(index, 1);
