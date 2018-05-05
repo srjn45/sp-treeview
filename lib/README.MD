@@ -55,7 +55,7 @@ Once your library is imported, you can use its components in your Angular applic
 
 or
 
-<sp-treeview-dropdown [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview-dropdown>
+<sp-treeview-dropdown [placeholder]="'your placeholder here'" [nodes]="nodes" [config]="config" (change)="onChange($event)" (delete)="onDelete($event)" (addChild)="onAddChild($event)"></sp-treeview-dropdown>
 ```
 
 ## Development
@@ -75,3 +75,11 @@ $ npm run lint
 ## License
 
 MIT © [srjn45](mailto:srajanpathak45@gmail.com)
+
+
+## Change Logs
+
+### v0.9.3
+> added placeholder on dropdown
+> fixed filter issue when the tree is collapsed
+> fixed exception thrown when removing chips with collapsed dropdown

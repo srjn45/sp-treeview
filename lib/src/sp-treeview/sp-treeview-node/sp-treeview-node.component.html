@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<ng-template #nodeTemplate let-node="node" let-config="config" let-onCollapseExpand="onCollapseExpand" let-onCheckChange="onCheckChange" let-onRadioChange="onRadioChange"
-  let-onDelete="onDelete" let-onAddChild="onAddChild">
+<ng-template #nodeTemplate let-node="node" let-config="config" let-onCollapseExpand="onCollapseExpand" let-onCheckChange="onCheckChange"
+  let-onRadioChange="onRadioChange" let-onDelete="onDelete" let-onAddChild="onAddChild">
   <div class="tree-node">
     <button type="button" mat-button mat-icon-button *ngIf="node.children" (click)="onCollapseExpand()" color="primary">
       <mat-icon *ngIf="node.collapsed">keyboard_arrow_right</mat-icon>
@@ -27,7 +27,8 @@
   <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{node: node, config: config, onCollapseExpand: onCollapseExpand, onCheckChange: onCheckChange, onRadioChange: onRadioChange, onDelete: onDelete, onAddChild: onAddChild}">
   </ng-template>
 
-  <div class="node-child" *ngIf="!node.collapsed">
+  <!-- <div class="node-child" *ngIf="!node.collapsed"> -->
+  <div class="node-child" [class.slideUp]="node.collapsed">
     <sp-treeview-node *ngFor="let child of node.children" [node]="child" [config]="config" (checkChange)="onChildCheckChange($event)"
       (radioSelect)="childRadioSelected($event)" (checkboxSelect)="childCheckboxSelected($event)" (delete)="onDelete($event)"
       (addChild)="onAddChild($event)">

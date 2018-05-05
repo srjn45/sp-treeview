@@ -11,6 +11,8 @@ import { Node } from '../model/node';
 })
 export class SpTreeviewDropdownComponent implements OnInit {
 
+  @Input() placeholder: string;
+
   @Input() nodes: Node[];
   @Input() config: Config = new Config();
 

@@ -104,7 +104,6 @@ export class SpTreeviewNodeComponent implements OnInit {
   }
 
   filter(text: string): boolean {
-
     if (this.node.children == null) {
       if (this.node.name.toLowerCase().startsWith(text.toLowerCase())) {
         this.hide = false;
@@ -123,6 +122,7 @@ export class SpTreeviewNodeComponent implements OnInit {
       });
       if (matchFound) {
         this.hide = false;
+        this.node.collapsed = false;
         return true;
       } else {
         if (this.node.name.toLowerCase().startsWith(text.toLowerCase())) {
