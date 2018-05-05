@@ -5,9 +5,11 @@
 .full-width {
     width: 100%;
 }
+
 .pointer {
     cursor: pointer;
 }
+
 .dropDown {
     background: white;
     position: absolute;
@@ -18,6 +20,7 @@
     box-shadow: 0px 1px 2px 0px grey;
     z-index: 1010;
 }
+
 .cvr-screen {
     position: fixed;
     top: 0px;
@@ -26,13 +29,14 @@
     height: 100vh;
     z-index: 1000;
 }
+
 .liftup {
     z-index: 1010;
 }
 
-input.mat-chip-input {
+/* input.mat-chip-input {
     display: none !important;
-}
+} */
 
 ::ng-deep .mat-chip-list-wrapper {
     flex-wrap: nowrap !important;
@@ -40,4 +44,14 @@ input.mat-chip-input {
     overflow: hidden;
     scroll-behavior: smooth;
     height: 32px;
+}
+
+.slideUp {
+    height: 0px !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+* {
+    transition: all 0.3s;
 }
