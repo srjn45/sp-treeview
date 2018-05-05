@@ -10,7 +10,7 @@ import { Config, SELECT_CHECKBOX, SELECT_RADIO, CHECKED_VALUE_HIGHEST_SELECTED, 
 export class AppComponent {
 
   nodes: Node[] = [
-    <Node>{
+    Node.nodify({
       name: "java",
       value: {},
       children: [
@@ -18,7 +18,7 @@ export class AppComponent {
         { name: "pryl", value: {} },
         { name: "rkshr", value: {}, addChild: true }
       ], deleteNode: false
-    },
+    }),
     new Node("Electronics", 1, [
       new Node("Mobile Phones", 11, [
         new Node("Pixel 2 XL", 111),
@@ -69,7 +69,7 @@ export class AppComponent {
     ])
   ];
 
-  public config: Config = new Config(SELECT_CHECKBOX, CHECKED_VALUE_HIGHEST_SELECTED, true, true, false, true, '400px');
+  public config: Config = new Config(SELECT_CHECKBOX, CHECKED_VALUE_ALL, true, true, false, true, '400px');
 
   constructor() {
     console.log(this.config);
