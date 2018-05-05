@@ -105,6 +105,12 @@ MIT © [srjn45](mailto:srajanpathak45@gmail.com)
 
 ## Change Logs
 
+### v0.9.6
+
+> fixed parent checked status when child node is deleted via chips
+
+> fixed issue in fetching selected nodes in leaves and all options
+
 ### v0.9.5
 
 > minor bug fixes

@@ -45,7 +45,6 @@ export class SpTreeviewNodeComponent implements OnInit {
     } else if (this.config.select === this.SELECT_RADIO) {
       // can check if multiple nodes are selected then log the error
     }
-
   }
 
   onCollapseExpand = () => {
