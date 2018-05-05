@@ -2,11 +2,12 @@ import { CHECKED_VALUE_HIGHEST_SELECTED, CHECKED_VALUE_LEAVES } from './config';
 
 export class Node {
 
-    public static nodify(node: Node) {
+    public static nodify(node: any): Node {
         node = Object.setPrototypeOf(node, Node.prototype);
         if (node.children != null) {
             node.children.forEach(n => this.nodify(n));
         }
+        return node;
     }
 
     constructor(
@@ -58,27 +59,31 @@ export class Node {
     }
 
     public checkImmediateChildren() {
-        let checkedChildren: number = this.children.filter(n => n.checked).length;
+        if (this.children) {
+            this.children.forEach(c => c.checkImmediateChildren());
 
-        let indeterminateChildren: number = this.children.filter(n => n.indeterminate).length;
+            let checkedChildren: number = this.children.filter(n => n.checked).length;
 
-        if (indeterminateChildren > 0) {
-            // if indeterminate child the indeterminate
-            this.checked = false;
-            this.indeterminate = true;
-        } else {
-            // if no indeterminate child
-            this.indeterminate = false;
-            if (checkedChildren === this.children.length) {
-                // if all checked then checked
-                this.checked = true;
-            } else if (checkedChildren === 0) {
-                // if all unchecked then unchecked
-                this.checked = false;
-            } else {
-                // if not all checked then indeterminate
+            let indeterminateChildren: number = this.children.filter(n => n.indeterminate).length;
+
+            if (indeterminateChildren > 0) {
+                // if indeterminate child the indeterminate
                 this.checked = false;
                 this.indeterminate = true;
+            } else {
+                // if no indeterminate child
+                this.indeterminate = false;
+                if (checkedChildren === this.children.length) {
+                    // if all checked then checked
+                    this.checked = true;
+                } else if (checkedChildren === 0) {
+                    // if all unchecked then unchecked
+                    this.checked = false;
+                } else {
+                    // if not all checked then indeterminate
+                    this.checked = false;
+                    this.indeterminate = true;
+                }
             }
         }
     }
@@ -99,20 +104,21 @@ export class Node {
     }
 
     public checkedAll(): Node[] {
-        if (!this.checked && !this.indeterminate) {
-            return [];
-        }
-        if (this.children) {
-            let values = [];
-            if (this.checked) {
-                values.push(this);
+        if (this.checked || this.indeterminate) {
+            if (this.children) {
+                let values = [];
+                if (this.checked) {
+                    values.push(this);
+                }
+                this.children.forEach(n => {
+                    n.checkedAll().forEach(v => values.push(v));
+                });
+                return values;
+            } else {
+                return [this];
             }
-            this.children.forEach(n => {
-                n.checkedAll().forEach(v => values.push(v));
-            });
-            return values;
         } else {
-            return [this];
+            return [];
         }
     }
 
