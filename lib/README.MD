@@ -105,6 +105,10 @@ MIT © [srjn45](mailto:srajanpathak45@gmail.com)
 
 ## Change Logs
 
+### v0.9.7
+
+> added keywords
+
 ### v0.9.6
 
 > fixed parent checked status when child node is deleted via chips
